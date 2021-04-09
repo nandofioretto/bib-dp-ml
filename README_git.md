@@ -12,103 +12,111 @@
 <a name="_dp_for_ml"/>
 
 ## Preliminaries on Differential Privacy for Machine Learning
-We consider a randomized algorithm $`\mathcal{A}: \mathcal{D} \to \mathcal{R}`$ with domain $`\mathcal{D}`$ and range $`\mathcal{R}`$. <br>
-We consider _input_ datasets $`D`$, $`D' \in \mathcal{D}`$ and call them adjacent, written $`D \sim D'`$ if they differ by one individual example. 
+We consider a randomized algorithm <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}: \mathcal{D} \to \mathcal{R}"/> with domain <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{D}"/> and range <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{R}"/>. <br>
+We consider _input_ datasets <img align="center" src="https://latex.codecogs.com/gif.latex?D"/>, <img align="center" src="https://latex.codecogs.com/gif.latex?D' \in \mathcal{D}"/> and call them adjacent, written <img align="center" src="https://latex.codecogs.com/gif.latex?D \sim D'"/> if they differ by one individual example. 
 
 
 ### Differential Privacy
-A randomized algorithm $`\mathcal{A}`$ satisfies $`(\epsilon, \delta)`$-differential privacy (DP) if for any two adjacent inputs $`D, D' \in \mathcal{D}`$ and for any outcome $`\omega \in \mathcal{R}`$:
+A randomized algorithm <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> satisfies <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \delta)"/>-differential privacy (DP) if for any two adjacent inputs <img align="center" src="https://latex.codecogs.com/gif.latex?D, D' \in \mathcal{D}"/> and for any outcome <img align="center" src="https://latex.codecogs.com/gif.latex?\omega \in \mathcal{R}"/>:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\Pr( \mathcal{A}(D) = \omega ) \leq 
 	e^{\epsilon} \Pr( \mathcal{A}(D') = \omega ) + \delta,
+"/>
+</center>
 
-```
-
-where $`\epsilon`$ is the _privacy budget_ and $`\delta`$ is the _failure probability_.
+where <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/> is the _privacy budget_ and <img align="center" src="https://latex.codecogs.com/gif.latex?\delta"/> is the _failure probability_.
 
 #### Privacy Loss
-The privacy loss $`L_{\mathcal{A}}`$ of  $`\mathcal{A}`$ for outcome $`\omega \in \mathcal{R}`$ and inputs $` x, x' \in \mathcal{X}`$ is:
+The privacy loss <img align="center" src="https://latex.codecogs.com/gif.latex?L_{\mathcal{A}}"/> of  <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> for outcome <img align="center" src="https://latex.codecogs.com/gif.latex?\omega \in \mathcal{R}"/> and inputs <img align="center" src="https://latex.codecogs.com/gif.latex? x, x' \in \mathcal{X}"/> is:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	L_{\mathcal{A}}(\omega, x, x') = \log 
 	\frac{\Pr(\mathcal{A}(x) = \omega)}
 		 {\Pr(\mathcal{A}(x') = \omega)}.
-
-```
+"/>
+</center>
 
 
 #### Standard Composition
-The composition of an $`(\epsilon_1, \delta_1)`$-differentially private algorithms with an $`(\epsilon_2, \delta_2)`$-differentially private satisfies 
-$`(\epsilon_1 + \epsilon_2, \delta_1 + \delta_2)`$-differential privacy.
+The composition of an <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon_1, \delta_1)"/>-differentially private algorithms with an <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon_2, \delta_2)"/>-differentially private satisfies 
+<img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon_1 + \epsilon_2, \delta_1 + \delta_2)"/>-differential privacy.
 
 #### Advanced Composition
-For $`\epsilon, \delta, \delta' \geq 0 `$, composing _k_ $`(\epsilon, \delta)`$-differentially private algorithms satisfies $`(\epsilon', k\delta + \delta')`$-differential privacy under k-fold adaptive composition for 
+For <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon, \delta, \delta' \geq 0 "/>, composing _k_ <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \delta)"/>-differentially private algorithms satisfies <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon', k\delta + \delta')"/>-differential privacy under k-fold adaptive composition for 
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\epsilon' = \sqrt{2k\ln(1/\delta')\epsilon} + k\epsilon(e^\epsilon - 1).
-
-```
+"/>
+</center>
 
 
 #### Secrecy of the Sample
-Let $`\mathcal{A}`$ be an $`(\epsilon,\delta)`$-DP algorithm for datasets of size $`n`$. Consider $`\mathcal{A}'`$ a randomized algorithm that takes in input a dataset _D_ of size $`m \geq n`$, and runs  $`\mathcal{A}`$ on _D'_ obtained by uniformly subsampling _D_ _n_ times. Then $`\mathcal{A'}`$ is
-$`(\epsilon', \delta')`$-differentially private for
+Let <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> be an <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon,\delta)"/>-DP algorithm for datasets of size <img align="center" src="https://latex.codecogs.com/gif.latex?n"/>. Consider <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}'"/> a randomized algorithm that takes in input a dataset _D_ of size <img align="center" src="https://latex.codecogs.com/gif.latex?m \geq n"/>, and runs  <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> on _D'_ obtained by uniformly subsampling _D_ _n_ times. Then <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A'}"/> is
+<img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon', \delta')"/>-differentially private for
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\epsilon' = (e^\epsilon-1) (n/m) \qquad 
 	\delta' = \delta (n/m).
-
-```
+"/>
+</center>
 
 
 #### Global Sensitivity
-The sensitivity of a query $`Q`$ is its the maximal change in the output over all possible adjacent datasets $`D`$, $`D'`$:
+The sensitivity of a query <img align="center" src="https://latex.codecogs.com/gif.latex?Q"/> is its the maximal change in the output over all possible adjacent datasets <img align="center" src="https://latex.codecogs.com/gif.latex?D"/>, <img align="center" src="https://latex.codecogs.com/gif.latex?D'"/>:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\Delta_{Q} = \| Q(D) - Q(D')\|
+"/>
+</center>
 
-```
-
-where $`\|\cdot\|`$ is a norm, and we consider here it to be the $`\ell`$-2 norm.
+where <img align="center" src="https://latex.codecogs.com/gif.latex?\|\cdot\|"/> is a norm, and we consider here it to be the <img align="center" src="https://latex.codecogs.com/gif.latex?\ell"/>-2 norm.
 
 #### Local Sensitivity
-Given a dataset $`D`$, the _local sensitivity_ of a query $`Q`$ is defined as 
+Given a dataset <img align="center" src="https://latex.codecogs.com/gif.latex?D"/>, the _local sensitivity_ of a query <img align="center" src="https://latex.codecogs.com/gif.latex?Q"/> is defined as 
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\Delta^L_{Q}(D) = \max_{D' : D \sim D'}  \| Q(D) - Q(D')\|
+"/>
+</center>
 
-```
-
-where $`D'`$ are the possible neighbors of $`D`$.
-Publishing an answer using local sensitivity may leak information. For instance, if $`D`$ has small while $`D'`$ has large local sensitivity w.r.t. some query, the answer of the algorithm on $`D`$ would be very close to the original answer. 
+where <img align="center" src="https://latex.codecogs.com/gif.latex?D'"/> are the possible neighbors of <img align="center" src="https://latex.codecogs.com/gif.latex?D"/>.
+Publishing an answer using local sensitivity may leak information. For instance, if <img align="center" src="https://latex.codecogs.com/gif.latex?D"/> has small while <img align="center" src="https://latex.codecogs.com/gif.latex?D'"/> has large local sensitivity w.r.t. some query, the answer of the algorithm on <img align="center" src="https://latex.codecogs.com/gif.latex?D"/> would be very close to the original answer. 
 
 <a name="_smooth_sensitivity"/>
 
 #### Smooth Sensitivity
 Smooth sensitivity overcomes this limitation by smoothing the scale of noise across neighboring datasets. 
 
-Given a dataset $`D`$, and value $`\beta`$, the  $`\beta`$ _smooth sensitivity_ of $`Q`$ is defined as
+Given a dataset <img align="center" src="https://latex.codecogs.com/gif.latex?D"/>, and value <img align="center" src="https://latex.codecogs.com/gif.latex?\beta"/>, the  <img align="center" src="https://latex.codecogs.com/gif.latex?\beta"/> _smooth sensitivity_ of <img align="center" src="https://latex.codecogs.com/gif.latex?Q"/> is defined as
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\Delta^\beta_{Q}(D) = 
 	\max_{\text{any dataset } \hat{D}} \left( 
 		e^{-\beta \| D - \hat{D}\|} \Delta^L_{Q}(\hat{D})
 		\right)
+"/>
+</center>
 
-```
-
-Smooth sensitivity reduces the amount of noise to inject to a query answer by avoiding the worst-case sensitivity. It allows publishing an $`(\epsilon, \delta)`$-DP query with noise that is determined not only by the query but also by the dataset itself. 
+Smooth sensitivity reduces the amount of noise to inject to a query answer by avoiding the worst-case sensitivity. It allows publishing an <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \delta)"/>-DP query with noise that is determined not only by the query but also by the dataset itself. 
 
 ##### Smooth Sensitivity Framework
-Given a query $`Q`$, let _d_ be the dimension of the sample space, and Gaussian noise $`Z \sim N(0,1)`$ the output
+Given a query <img align="center" src="https://latex.codecogs.com/gif.latex?Q"/>, let _d_ be the dimension of the sample space, and Gaussian noise <img align="center" src="https://latex.codecogs.com/gif.latex?Z \sim N(0,1)"/> the output
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\tilde{Q}(D) = Q(D) + \frac{\Delta^\beta_{Q}(D)}{\alpha}
+"/>
+</center>
 
-```
-
-is $`(\epsilon, \delta)`$-DP, for $`\alpha = \frac{\epsilon}{\sqrt{ln(1/\delta)}}`$ and $`\beta = \Omega(\frac{\epsilon}{\sqrt{d ln(1/\delta)}})`$.
+is <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \delta)"/>-DP, for <img align="center" src="https://latex.codecogs.com/gif.latex?\alpha = \frac{\epsilon}{\sqrt{ln(1/\delta)}}"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?\beta = \Omega(\frac{\epsilon}{\sqrt{d ln(1/\delta)}})"/>.
 
 ###### Notes and Links:
 - [Slides including a good description of smooth sensitivity](https://www.cs.cmu.edu/afs/cs/usr/wing/www/class/15-895/AvrimBlum.pdf)
@@ -117,7 +125,7 @@ is $`(\epsilon, \delta)`$-DP, for $`\alpha = \frac{\epsilon}{\sqrt{ln(1/\delta)}
 <a name=_realxed_DP/>
 
 ### Relaxation of Differential Privacy
-The linear composition bound on $`\epsilon`$ can be reduced at the cost of slightly increasing the failure probability $`\delta`$. This relaxation considers the _expected_ privacy loss, rather than the _worst-case_ loss. <br>
+The linear composition bound on <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/> can be reduced at the cost of slightly increasing the failure probability <img align="center" src="https://latex.codecogs.com/gif.latex?\delta"/>. This relaxation considers the _expected_ privacy loss, rather than the _worst-case_ loss. <br>
 In turn, relaxation of differential privacy mechanisms can be defined to bound the _expected_ privacy loss in order to achieve better utility. 
 
 <a name=_CDP/>
@@ -125,43 +133,46 @@ In turn, relaxation of differential privacy mechanisms can be defined to bound t
 #### Concentrated Differential Privacy (CDP)
 The composition of multiple differentially private algorithms result in expected privacy loss which follows a _subgaussian distribution_. The, the expected privacy loss can be directly bounded by controlling the mean and the variance of the subgaussian distribution. This reduces the noise that should be added. 
 
-A randomized algorithm $`\mathcal{A}`$ is $`(\mu, \tau)`$-concentrated differentially-private if for all pairs of adjacent datasets $`D, D'`$,
+A randomized algorithm <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> is <img align="center" src="https://latex.codecogs.com/gif.latex?(\mu, \tau)"/>-concentrated differentially-private if for all pairs of adjacent datasets <img align="center" src="https://latex.codecogs.com/gif.latex?D, D'"/>,
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D_{\text{subG}} (\mathcal{A}(D) \| \mathcal{A}(D')) \leq (\mu, \tau)
+"/>
+</center>
 
-```
+where the subgaussian divergence <img align="center" src="https://latex.codecogs.com/gif.latex?D_{\text{subG}}"/>, is defined such that the expected privacy loss is bounded bu <img align="center" src="https://latex.codecogs.com/gif.latex?\mu"/> and the standard deviation of the centered subgaussian distribution is bounded by <img align="center" src="https://latex.codecogs.com/gif.latex?\tau"/>. 
 
-where the subgaussian divergence $`D_{\text{subG}}`$, is defined such that the expected privacy loss is bounded bu $`\mu`$ and the standard deviation of the centered subgaussian distribution is bounded by $`\tau`$. 
-
-Any $`\epsilon`$-DP algorithm satisfies $`(\epsilon \cdot (e^\epsilon -1) / 2, \epsilon)`$-CDP, however the converse is not true.
+Any <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-DP algorithm satisfies <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon \cdot (e^\epsilon -1) / 2, \epsilon)"/>-CDP, however the converse is not true.
 
 <a name=_zCDP/>
 
 #### Zero Concentrated Differential Privacy (zCDP)
 Is a variation on CDP that assumes the expected privacy loss to be tightly centered around zero mean. <br>
-A randomized algorithm $`\mathcal{A}`$ is $`(\xi, \rho)`$-zero-concentrated differentially private if, for all adjacent datasets $`D, D'`$ and all $`\alpha \in (1, \infty)`$,
+A randomized algorithm <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> is <img align="center" src="https://latex.codecogs.com/gif.latex?(\xi, \rho)"/>-zero-concentrated differentially private if, for all adjacent datasets <img align="center" src="https://latex.codecogs.com/gif.latex?D, D'"/> and all <img align="center" src="https://latex.codecogs.com/gif.latex?\alpha \in (1, \infty)"/>,
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D_{\alpha} (\mathcal{A}(D) \| \mathcal{A}(D')) \leq \xi + \rho\alpha
+"/>
+</center>
 
-```
+where <img align="center" src="https://latex.codecogs.com/gif.latex?D_{\alpha} (\mathcal{A}(D) \| \mathcal{A}(D'))"/> is the <img align="center" src="https://latex.codecogs.com/gif.latex?\alpha"/>-Renyi divergence between the distribution of <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}(D)"/> and that of <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}(D')"/>.
 
-where $`D_{\alpha} (\mathcal{A}(D) \| \mathcal{A}(D'))`$ is the $`\alpha`$-Renyi divergence between the distribution of $`\mathcal{A}(D)`$ and that of $`\mathcal{A}(D')`$.
-
-If $`\mathcal{A}`$ satisfies $`\epsilon`$-DP, then it also satisfies $`(\frac{1}{2}\epsilon^2)`$-zCDP. Additionally, if $`\mathcal{A}`$ satisfies $`\rho`$-zCDP, then it is $`(\rho, 2\sqrt{\rho \log(1/\delta)}, \delta)`$-DP, for any $`\delta > 0`$.
+If <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> satisfies <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-DP, then it also satisfies <img align="center" src="https://latex.codecogs.com/gif.latex?(\frac{1}{2}\epsilon^2)"/>-zCDP. Additionally, if <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> satisfies <img align="center" src="https://latex.codecogs.com/gif.latex?\rho"/>-zCDP, then it is <img align="center" src="https://latex.codecogs.com/gif.latex?(\rho, 2\sqrt{\rho \log(1/\delta)}, \delta)"/>-DP, for any <img align="center" src="https://latex.codecogs.com/gif.latex?\delta > 0"/>.
 
 <a name=_RDP/>
 
 #### Renyi Differentially Privacy (RDP)
-A randomized algorithm $`\mathcal{A}`$ is said to have [$`\epsilon`$-Renyi differential privacy](#Mironov:17) of order $`\alpha`$--said $`(\epsilon, \alpha)`$-RDP, for short--, if for any adjacent dataset $`D, D'`$:
+A randomized algorithm <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> is said to have [<img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-Renyi differential privacy](#Mironov:17) of order <img align="center" src="https://latex.codecogs.com/gif.latex?\alpha"/>--said <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \alpha)"/>-RDP, for short--, if for any adjacent dataset <img align="center" src="https://latex.codecogs.com/gif.latex?D, D'"/>:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D_\alpha(\mathcal{A}(D) \| \mathcal{A}(D')) \leq \epsilon.
+"/>
+</center>
 
-```
-
-If  $`\mathcal{A}`$ is an $`(\alpha,\epsilon)`$-RDP algorithm, then it also satisfies $`(\epsilon + \log\frac{1}{\delta}, \delta)`$-DP for any $`0<\delta<1`$.
+If  <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> is an <img align="center" src="https://latex.codecogs.com/gif.latex?(\alpha,\epsilon)"/>-RDP algorithm, then it also satisfies <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon + \log\frac{1}{\delta}, \delta)"/>-DP for any <img align="center" src="https://latex.codecogs.com/gif.latex?0<\delta<1"/>.
 
 <br>
 The main difference among these relaxation is that CDP and zCDP require a linear bound on all positive moments of privacy loss, whereas RDP only requires bounding one moment at a time. This enables a more accurate numerical analysis of the privacy loss. 
@@ -177,46 +188,50 @@ This technique is recurrent in privacy preserving deep learning.
 
 The moment of accountant is defined as
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\alpha_{\mathcal{A}}(\lambda) 
 	{\stackrel{\Delta}{=}} \max_{\text{aux}, D, D'} 
 	\alpha_{\mathcal{A}} (\lambda; \text{aux}, D, D'),
+"/>
+</center>
 
-```
+where <img align="center" src="https://latex.codecogs.com/gif.latex?\text{aux}"/> is just an auxiliary input to the mechanism and 
 
-where $`\text{aux}`$ is just an auxiliary input to the mechanism and 
-
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\alpha_{\mathcal{A}} (\lambda; \text{aux}, D, D')
 	{\stackrel{\Delta}{=}}
 	\log \mathbb{E}\left[
 		\exp( \lambda L(\mathcal{A}, \text{aux}, D, D'))
 	\right]
-
-```
+"/>
+</center>
 
 is the [moment generating function](https://newonlinecourses.science.psu.edu/stat414/node/72/) 
-of the _privacy loss random variable_ $`L(\mathcal{A}, \text{aux}, D, D') `$. The latter is in turn defined as $`L_{\mathcal{A}}(\mathcal{A}(D); D, D'`$, i.e., the random variable defiend by evaluating the privacy loss at an outcome sampled from $`\mathcal{A}(D)`$. 
+of the _privacy loss random variable_ <img align="center" src="https://latex.codecogs.com/gif.latex?L(\mathcal{A}, \text{aux}, D, D') "/>. The latter is in turn defined as <img align="center" src="https://latex.codecogs.com/gif.latex?L_{\mathcal{A}}(\mathcal{A}(D); D, D'"/>, i.e., the random variable defiend by evaluating the privacy loss at an outcome sampled from <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}(D)"/>. 
 
 The following properties of the moment accountant hold: 
 - <strong>Composability</strong>: 
-Consider a mechanism $`\mathcal{A}`$ that consists of a sequence of adaptive mechanisms $`\mathcal{A}_{1}, \ldots, \mathcal{A}_{k}`$ where $`\mathcal{A}_{i} : \prod_{j=1}^{i-1} \mathcal{R}_{j} \times \mathcal{D} \to \mathcal{R}_{i}`$. Then, for any output sequence $`o_1, \ldots, p_{k-1}`$ and any $`\lambda`$
+Consider a mechanism <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> that consists of a sequence of adaptive mechanisms <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}_{1}, \ldots, \mathcal{A}_{k}"/> where <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}_{i} : \prod_{j=1}^{i-1} \mathcal{R}_{j} \times \mathcal{D} \to \mathcal{R}_{i}"/>. Then, for any output sequence <img align="center" src="https://latex.codecogs.com/gif.latex?o_1, \ldots, p_{k-1}"/> and any <img align="center" src="https://latex.codecogs.com/gif.latex?\lambda"/>
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\alpha_{\mathcal{A}}(\lambda; D, D') = 
 	\sum_{i=1}^k \alpha_{\mathcal{A}_{i}} (\lambda; o_1, \ldots, o_{i-1}, D, D'),
+"/>
+</center>
 
-```
-
-where $`\alpha_{\mathcal{A}}`$ is conditioned on $`\mathcal{A}_{i}`$' output being $`o_i`$_ for $`i < k`$. 
+where <img align="center" src="https://latex.codecogs.com/gif.latex?\alpha_{\mathcal{A}}"/> is conditioned on <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}_{i}"/>' output being <img align="center" src="https://latex.codecogs.com/gif.latex?o_i"/>_ for <img align="center" src="https://latex.codecogs.com/gif.latex?i < k"/>. 
 This property is proved in [Dwork:14](#Dwork:14).
 - <strong>Tail bound</strong>: 
-For any $`\epsilon >0`$, the mechanism $`\mathcal{A}`$ is $`(\epsilon, \delta)`$-differentially private for:
+For any <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon >0"/>, the mechanism <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> is <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \delta)"/>-differentially private for:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\delta = \min_{\lambda} \exp( \alpha_{\mathcal{A}}(\lambda) - \lambda \epsilon ).
-
-```
+"/>
+</center>
 
 The above is proven in [Bun:16](#Bun:16).
 
@@ -247,70 +262,76 @@ We review some important metrics to measure distance between distributions.
 #### KL-Divergence
 The _KL-Divergence_ (or _relative entropy_) between two random variables _Y_ and _Z_ taking values from the same domain is:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D(Y \| Z) = \mathbb{E}_{y \sim Y} \left[
 	\ln \frac{\Pr(Y = y)}{\Pr(Z = y)} \right],
+"/>
+</center>
 
-```
-
-We have that $`D(Y \| Z) \geq 0`$, with equality iff _Y_ and _Z_ are identically distributed. Note that _D_ is not symmetric, and does not satisfy the triangle inequality. 
+We have that <img align="center" src="https://latex.codecogs.com/gif.latex?D(Y \| Z) \geq 0"/>, with equality iff _Y_ and _Z_ are identically distributed. Note that _D_ is not symmetric, and does not satisfy the triangle inequality. 
 
 #### Max Divergence 
-The _Max Divergence_ between two random variables $`Y`$ and $`Z`$ taking values from the same domain is:
+The _Max Divergence_ between two random variables <img align="center" src="https://latex.codecogs.com/gif.latex?Y"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?Z"/> taking values from the same domain is:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D_{\infty}(Y \| Z) = \max_{S \subseteq \text{Supp}(Y)}
 	\left[
 		\ln \frac{Pr(Y \in S)}{Pr(Z \in S)}
 	\right].
+"/>
+</center>
 
-```
 
+The <img align="center" src="https://latex.codecogs.com/gif.latex?\delta"/>-approximate Max Divergence between <img align="center" src="https://latex.codecogs.com/gif.latex?Y"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?Z"/> is:
 
-The $`\delta`$-approximate Max Divergence between $`Y`$ and $`Z`$ is:
-
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D^{\delta}_{\infty}(Y \| Z) = \max_{S \subseteq \text{Supp}(Y) : 
 										   \Pr(Y\in S) \geq \delta}
 	\left[
 		\ln \frac{Pr(Y \in S) - \delta}{Pr(Z \in S)}
 	\right].
-
-```
+"/>
+</center>
 
 
 #### Statistical Distance
-The _Statistical Distance_ between two random variables $`Y`$ and $`Z`$ is
+The _Statistical Distance_ between two random variables <img align="center" src="https://latex.codecogs.com/gif.latex?Y"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?Z"/> is
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\Delta(Y, Z) = \max_S 
 	\left| 
 		\Pr(Y \in S) - \Pr(Z \in S)
 	\right|
+"/>
+</center>
 
-```
-
-_Y_ and _Z_ are $`\delta`$-close  if $`\Delta(Y, Z) \leq \delta`$.
+_Y_ and _Z_ are <img align="center" src="https://latex.codecogs.com/gif.latex?\delta"/>-close  if <img align="center" src="https://latex.codecogs.com/gif.latex?\Delta(Y, Z) \leq \delta"/>.
 
 #### Relation to Differential Privacy
-Note that an algorithm $`\mathcal{A}`$ is
-- $`\epsilon`$-differentially private if on every two neighboring databases $`x`$ and $`y`$, 
+Note that an algorithm <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{A}"/> is
+- <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differentially private if on every two neighboring databases <img align="center" src="https://latex.codecogs.com/gif.latex?x"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?y"/>, 
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D_{\infty}(\mathcal{A}(x) \| \mathcal{A}(y)) \leq \epsilon 
 	\qquad \text{and} \qquad
 	D_{\infty}(\mathcal{A}(y) \| \mathcal{A}(x)) \leq \epsilon.
+"/>
+</center>
 
-```
+- <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon, \delta"/>-differentially private if on every two neighboring databases <img align="center" src="https://latex.codecogs.com/gif.latex?x"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?y"/>, 
 
-- $`\epsilon, \delta`$-differentially private if on every two neighboring databases $`x`$ and $`y`$, 
-
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	D_{\infty}^{\delta}(\mathcal{A}(x) \| \mathcal{A}(y)) \leq \epsilon 
 	\qquad \text{and} \qquad
 	D_{\infty}^{\delta}(\mathcal{A}(y) \| \mathcal{A}(x)) \leq \epsilon.
-
-```
+"/>
+</center>
 
 
 #### TODO: 
@@ -325,28 +346,30 @@ Note that an algorithm $`\mathcal{A}`$ is
 Several general directions have been investigated to create differential privacy machine learning algorithms.
 
 #### Input Perturbation
-The most straightforward way to guarantee differential privacy is to perturb the input data. If $`x`$ is a d-dimensional vector, then a differentially private version of $`x`$ is constructed by adding noise to it from a random d-dimensional vector $`Z`$ with density:
+The most straightforward way to guarantee differential privacy is to perturb the input data. If <img align="center" src="https://latex.codecogs.com/gif.latex?x"/> is a d-dimensional vector, then a differentially private version of <img align="center" src="https://latex.codecogs.com/gif.latex?x"/> is constructed by adding noise to it from a random d-dimensional vector <img align="center" src="https://latex.codecogs.com/gif.latex?Z"/> with density:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	p_Z(z) \propto \exp \left( -\frac{\epsilon}{2} \| z\| \right).
-
-```
+"/>
+</center>
 
 This method can be used to construct a noisy histogram to estimate the density function of the data. The noisy, private, data can be used as input to the desired machine learning algorithm. (See [33, 26] of [Ji:14](#Ji:14)).
 
 #### Output Perturbation
-Suppose we want to compute a function $`f`$ over a dataset D. Output perturbation algorithms first learn the model using the clean data, hence apply noise directly to the output of the function $`f`$, generating a noisy estimate 
-$`
+Suppose we want to compute a function <img align="center" src="https://latex.codecogs.com/gif.latex?f"/> over a dataset D. Output perturbation algorithms first learn the model using the clean data, hence apply noise directly to the output of the function <img align="center" src="https://latex.codecogs.com/gif.latex?f"/>, generating a noisy estimate 
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\hat{f}(D) = f(D) + Z
-`$, 
-where $`Z`$ is a d-dimensional random vector with density 
+"/>, 
+where <img align="center" src="https://latex.codecogs.com/gif.latex?Z"/> is a d-dimensional random vector with density 
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	p_Z(z) \propto \exp \left( -\frac{\epsilon}{\Delta_f} \| z\| \right).
+"/>
+</center>
 
-```
-
-and $`\Delta_f`$ is the sensitivity of the function $`f`$. 
+and <img align="center" src="https://latex.codecogs.com/gif.latex?\Delta_f"/> is the sensitivity of the function <img align="center" src="https://latex.codecogs.com/gif.latex?f"/>. 
 
 Typical algorithms apply the Laplace or the Exponential mechanism on the output parameters of the model (e.g., [52, 40, 46, 28, 30, 7, 53] of [Ji:14](#Ji:14)).
 
@@ -354,14 +377,15 @@ The methods that apply noise to the output parameters at each iteration during t
 
 #### Objective Perturbation 
 Objective perturbation methods introduce noise to the objective function of the optimization/learning process. These methods require bounding the sensitivity of the function to approximate  (e.g., [56, 5, 6, 45] of [Ji:14](#Ji:14)). 
-This strategy was applied to regularized convex classification. In other words, given a non-private algorithm computing output _f_ via a minimization of a (strongly) convex function $`J(g, D)`$, we can produce a differentially private algorithm by adding noise prior to minimization:
+This strategy was applied to regularized convex classification. In other words, given a non-private algorithm computing output _f_ via a minimization of a (strongly) convex function <img align="center" src="https://latex.codecogs.com/gif.latex?J(g, D)"/>, we can produce a differentially private algorithm by adding noise prior to minimization:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	f = \arg\min_h \left( J(u, D) + g^T Z \right),
+"/>
+</center>
 
-```
-
-where $`Z`$ has the same shape as in that of the input perturbation but the coefficient in the exponent must be chosen as a function of the sensitivity of the optimization. <br>
+where <img align="center" src="https://latex.codecogs.com/gif.latex?Z"/> has the same shape as in that of the input perturbation but the coefficient in the exponent must be chosen as a function of the sensitivity of the optimization. <br>
 
 
 #### Sample-and-Aggregate 
@@ -369,8 +393,8 @@ In objective perturbation, in general, the coefficient depend on the target func
 The sample-and-aggregate method tries to relax this restriction by approximating the function value on subsets of the actual data. 
 The general method works by partitioning the dataset into small subsets to estimate a model, then adding noise to an aggregation step [42,27,14] of [Ji:14](#Ji:14).
 
-Most output and objective perturbation mechanisms require a bounded sample space to compute a bounded sensitivity. Mechanisms based on the sample-and-aggregate framework don’t have this limitation. However they guarantee $`\epsilon, \delta`$-differential privacy. 
-When the sample space is unbounded one can guarantee $`\epsilon`$-differential privacy by truncating values in a pre-processing step. If the truncation mechanism is independent of the private data, then the truncation is
+Most output and objective perturbation mechanisms require a bounded sample space to compute a bounded sensitivity. Mechanisms based on the sample-and-aggregate framework don’t have this limitation. However they guarantee <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon, \delta"/>-differential privacy. 
+When the sample space is unbounded one can guarantee <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differential privacy by truncating values in a pre-processing step. If the truncation mechanism is independent of the private data, then the truncation is
 privacy-safe.
 
 
@@ -380,35 +404,37 @@ privacy-safe.
 ## Differential Privacy for Non-Deep Machine Learning
 
 #### Naive Bayes Model
-We want to build a classifier that predicts a label Y given feature X. Given X and a model, one can compute the conditional probability $`\Pr(Y|X)`$ for all labels Y and choose the label with the largest conditional probability value.
+We want to build a classifier that predicts a label Y given feature X. Given X and a model, one can compute the conditional probability <img align="center" src="https://latex.codecogs.com/gif.latex?\Pr(Y|X)"/> for all labels Y and choose the label with the largest conditional probability value.
 
 There are two main assumptions:
-1. The $`X_{i}`$ are conditionally independent given $`Y`$ , i.e.,
-$`\Pr(X_{i} |Y, X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}) = \Pr(X_{i}|Y) `$. This enables us to compute the coefficient of each feature independently. 
-2. Tor all numerical features in $`x`$, $`\Pr(X_{i} |Y)`$ is a normal distribution.
+1. The <img align="center" src="https://latex.codecogs.com/gif.latex?X_{i}"/> are conditionally independent given <img align="center" src="https://latex.codecogs.com/gif.latex?Y"/> , i.e.,
+<img align="center" src="https://latex.codecogs.com/gif.latex?\Pr(X_{i} |Y, X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}) = \Pr(X_{i}|Y) "/>. This enables us to compute the coefficient of each feature independently. 
+2. Tor all numerical features in <img align="center" src="https://latex.codecogs.com/gif.latex?x"/>, <img align="center" src="https://latex.codecogs.com/gif.latex?\Pr(X_{i} |Y)"/> is a normal distribution.
 
 Based on (1) we have that:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\Pr(Y | X_1, \ldots, X_n) \propto \Pr(Y) \prod_{i=1}^n P(X_i | Y) 
+"/>
+</center>
 
-```
+The model can be thus trained by estimating all the <img align="center" src="https://latex.codecogs.com/gif.latex?\Pr(Y"/> and the <img align="center" src="https://latex.codecogs.com/gif.latex?\Pr(X_i | Y"/>. The former can be estimated by the frequencies of samples with label <img align="center" src="https://latex.codecogs.com/gif.latex?Y"/> in the training set. For the latter, if <img align="center" src="https://latex.codecogs.com/gif.latex?X_i"/> is categorical, then for values <img align="center" src="https://latex.codecogs.com/gif.latex?x"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?y"/>:
 
-The model can be thus trained by estimating all the $`\Pr(Y`$ and the $`\Pr(X_i | Y`$. The former can be estimated by the frequencies of samples with label $`Y`$ in the training set. For the latter, if $`X_i`$ is categorical, then for values $`x`$ and $`y`$:
-
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 \begin{align*}
 	\Pr(X_i = x | Y = y) &= \frac{\Pr(X_i=x, Y=y)}{\Pr(Y=y)} \\
  	                     &= \frac{\sum_j \text{ct}(x_{ij} = x) \text{ct}(y_i = y)}
 	                            {\sum_j \text{ct}(y_i =y)}.
 \end{align*}
+"/>
+</center>
 
-```
+where ct counts the number of elements <img align="center" src="https://latex.codecogs.com/gif.latex?x_ij"/> taking on value <img align="center" src="https://latex.codecogs.com/gif.latex?x"/>. 
+If <img align="center" src="https://latex.codecogs.com/gif.latex?X_i"/> is numeric, then by (2), the Normal distribution <img align="center" src="https://latex.codecogs.com/gif.latex?\Pr(X_i | Y)"/> is decided by <img align="center" src="https://latex.codecogs.com/gif.latex?E[X_i | Y]"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?Var[X_i | Y]"/>. 
 
-where ct counts the number of elements $`x_ij`$ taking on value $`x`$. 
-If $`X_i`$ is numeric, then by (2), the Normal distribution $`\Pr(X_i | Y)`$ is decided by $`E[X_i | Y]`$ and $`Var[X_i | Y]`$. 
-
-To guarantee $`\epsilon`$-differential privacy, [Vaidya:13](#Vaidya:13) assumes that the value of all features in the dataset can be bounded by some known value. This bound is used to compute the model sensitivity and add noise with Laplace mechanism with parameter $`O(1/n\epsilon)`$.
+To guarantee <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differential privacy, [Vaidya:13](#Vaidya:13) assumes that the value of all features in the dataset can be bounded by some known value. This bound is used to compute the model sensitivity and add noise with Laplace mechanism with parameter <img align="center" src="https://latex.codecogs.com/gif.latex?O(1/n\epsilon)"/>.
 
 ##### References
 
@@ -416,27 +442,29 @@ To guarantee $`\epsilon`$-differential privacy, [Vaidya:13](#Vaidya:13) assumes 
 
 
 #### Linear Regression
-In linear regression one wants to express numerical values $`Y`$ as weighted combination $`\omega X`$ of the features in $`X`$. The training solves:
+In linear regression one wants to express numerical values <img align="center" src="https://latex.codecogs.com/gif.latex?Y"/> as weighted combination <img align="center" src="https://latex.codecogs.com/gif.latex?\omega X"/> of the features in <img align="center" src="https://latex.codecogs.com/gif.latex?X"/>. The training solves:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\min_\omega \sum_i (y_i - \omega^T x_i)^2.
-
-```
+"/>
+</center>
 
 
 The *functional mechanism* is a differential privacy model for linear regression that was proposed in [Zhang:12](#Zhang:12). It expands the above expression using Taylor expansion, approximates it with a low degree polynomial, and add noise to its coefficients to guarantee privacy.
 
 #### Logistic Regression 
-Logistic regression is a model for binary classification. It predicts $`\Pr(Y = 1 \ X) = \frac{1}{1 + e-{\omega^T X}}`$ given features X in a sample. 
-The parameters $`\omega`$ are trained by:
+Logistic regression is a model for binary classification. It predicts <img align="center" src="https://latex.codecogs.com/gif.latex?\Pr(Y = 1 \ X) = \frac{1}{1 + e-{\omega^T X}}"/> given features X in a sample. 
+The parameters <img align="center" src="https://latex.codecogs.com/gif.latex?\omega"/> are trained by:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\min_\omega \sum_i \log (1 + \exp(-y_i \omega^T x_i)).
+"/>
+</center>
 
-```
-
-In [Zhang:12](#Zhang:12), the functional mechanism, that uses Taylor expansion, is applied to achieve an $`\epsilon`$-differential private algorithm for logistic regression.<br>
-Two additional mechanisms that can ensure $`\epsilon`$-differentially private models are the _output perturbation_ and the _objective perturbation_ mechanisms, described in [Chaudhuri:12a](#Chaudhuri:12a).
+In [Zhang:12](#Zhang:12), the functional mechanism, that uses Taylor expansion, is applied to achieve an <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differential private algorithm for logistic regression.<br>
+Two additional mechanisms that can ensure <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differentially private models are the _output perturbation_ and the _objective perturbation_ mechanisms, described in [Chaudhuri:12a](#Chaudhuri:12a).
 
 #### Kernel SVM
 
@@ -451,10 +479,10 @@ Two additional mechanisms that can ensure $`\epsilon`$-differentially private mo
 #### Decision Tree Learning
 Decision tree learning works by iteratively partitioning the dataset selecting a variable with an associated _split value_. The process creates a tree, by construction, where the path from the tree root to a node describes a partition of the data, containing values satisfying all the decision rules in the traversed nodes.
 
-The work by [Jagannathan:10](#Jagannathan:10) constructs an $`\epsilon`$-differential private decision trees by randomly constructing a tree (i.e., it randomly selects splitting rules until a given tree depth is reached) thus without looking at the data. Each decision tree induces a partition over the data and counts the number of elements in each partition that have a given label. 
+The work by [Jagannathan:10](#Jagannathan:10) constructs an <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differential private decision trees by randomly constructing a tree (i.e., it randomly selects splitting rules until a given tree depth is reached) thus without looking at the data. Each decision tree induces a partition over the data and counts the number of elements in each partition that have a given label. 
 The resulting counts are perturbed using a Laplace mechanism and used to estimate the probability of label y in each tree leaf.
 
-[Friedman:10](#Friedman:10) proposed an $`\epsilon`$-differential private mechanism for tree that relies on the use of the Exponential mechanism to select the variable with largest score (e.g., information Gain, Gini index) differentially privately. 
+[Friedman:10](#Friedman:10) proposed an <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differential private mechanism for tree that relies on the use of the Exponential mechanism to select the variable with largest score (e.g., information Gain, Gini index) differentially privately. 
 For each partition, induced by the process, it assigns a noisy count of samples with each label. These noisy counts are hence used to decide whether to remove those nodes without having to consider privacy. 
 To avoid selecting a split value for a feature, the mechanism assumes that all features are categorical. 
 
@@ -465,48 +493,51 @@ To avoid selecting a split value for a feature, the mechanism assumes that all f
 
 #### Online Convex Programming
 Focuses on solving convex programming problems in an online manner, by analyzing examples one at a time. 
-The input is a sequence of functions $`(f_1, \ldots, f_T)`$ and the output is a sequence of points $`w_1, \ldots, w_T`$ from a convex set $`C`$. 
-The algorithm starts at a random point $`w_0`$ and at each step _i_ it finds a new output $`w_{i+1} \in C`$ using $`(f_1, \ldots, f_i)`$ and $`(w_1, \ldots, w_i)`$. The goal of online convex programming is to minimize _regret_:
+The input is a sequence of functions <img align="center" src="https://latex.codecogs.com/gif.latex?(f_1, \ldots, f_T)"/> and the output is a sequence of points <img align="center" src="https://latex.codecogs.com/gif.latex?w_1, \ldots, w_T"/> from a convex set <img align="center" src="https://latex.codecogs.com/gif.latex?C"/>. 
+The algorithm starts at a random point <img align="center" src="https://latex.codecogs.com/gif.latex?w_0"/> and at each step _i_ it finds a new output <img align="center" src="https://latex.codecogs.com/gif.latex?w_{i+1} \in C"/> using <img align="center" src="https://latex.codecogs.com/gif.latex?(f_1, \ldots, f_i)"/> and <img align="center" src="https://latex.codecogs.com/gif.latex?(w_1, \ldots, w_i)"/>. The goal of online convex programming is to minimize _regret_:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	R = \sum_{i=1}^T f_i(w_i) - \min_{w\in C} \sum_{i=1}^T f_i(w).
+"/>
+</center>
 
-```
 
-
-The work of [Jain:12](#Jain::12) provides an $`(\epsilon, \delta)`$-differentially private method for the Implicit Gradient Descent (IGD) and for the Generalized Infinitesimal Gradient Ascent (GIGA). It assumes that the $`f_i`$ functions are L-Lipshitz continuous for some constant L and $`\eta`$-strongly convex. 
+The work of [Jain:12](#Jain::12) provides an <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \delta)"/>-differentially private method for the Implicit Gradient Descent (IGD) and for the Generalized Infinitesimal Gradient Ascent (GIGA). It assumes that the <img align="center" src="https://latex.codecogs.com/gif.latex?f_i"/> functions are L-Lipshitz continuous for some constant L and <img align="center" src="https://latex.codecogs.com/gif.latex?\eta"/>-strongly convex. 
 
 IGD computes:
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\hat{w}_{i+1} = \arg\min_{w \in C} \left(
 		\frac{1}{2} \| w - w_i\|^2 + \frac{1}{\eta i} f_i(w)
 	\right),
+"/>
+</center>
 
-```
-
-and projects $`\hat{w}_{i+1}`$ onto $`C`$ to get the output $`w_{i+1}`$. 
+and projects <img align="center" src="https://latex.codecogs.com/gif.latex?\hat{w}_{i+1}"/> onto <img align="center" src="https://latex.codecogs.com/gif.latex?C"/> to get the output <img align="center" src="https://latex.codecogs.com/gif.latex?w_{i+1}"/>. 
 
 GIGA computes
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\hat{w}_{i+1} = w_i - \frac{1}{\eta i} \nabla f_i(w_i),
+"/>
+</center>
 
-```
-
-and then $`\hat{w}_{i+1}`$ onto $`C`$ to get the output $`w_{i+1}`$. <br>
-Both methods ensure bounded sensitivity of $`w_{i+1}`$ given $`w_i`$. To guarantee privacy, the mechanism adds Gaussian noise to every $`\hat{w}_i`$ 
-before projection. Given T function (or samples), the expected regret attained by this $`\epsilon, \delta`$-differentially private mechanism is $`O(\sqrt{\frac{t}{\epsilon}} \ln^2 \frac{T}{\delta} )`$._
+and then <img align="center" src="https://latex.codecogs.com/gif.latex?\hat{w}_{i+1}"/> onto <img align="center" src="https://latex.codecogs.com/gif.latex?C"/> to get the output <img align="center" src="https://latex.codecogs.com/gif.latex?w_{i+1}"/>. <br>
+Both methods ensure bounded sensitivity of <img align="center" src="https://latex.codecogs.com/gif.latex?w_{i+1}"/> given <img align="center" src="https://latex.codecogs.com/gif.latex?w_i"/>. To guarantee privacy, the mechanism adds Gaussian noise to every <img align="center" src="https://latex.codecogs.com/gif.latex?\hat{w}_i"/> 
+before projection. Given T function (or samples), the expected regret attained by this <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon, \delta"/>-differentially private mechanism is <img align="center" src="https://latex.codecogs.com/gif.latex?O(\sqrt{\frac{t}{\epsilon}} \ln^2 \frac{T}{\delta} )"/>._
 
 
 #### Feature Selection
 The foal of feature selection is to produce a dimensionality reduction from a high-dimensional dataset in which only a subset of the original features from the original feature space is retained.
 
-The work in [Staal:12](#Staal:12) proposes an $`\epsilon`$-differentially private method for feature selection. For any feature set _S_, it defines a function _F(S)_ that tells how many pairs of samples from different classes  can the features in S distinguish. 
+The work in [Staal:12](#Staal:12) proposes an <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon"/>-differentially private method for feature selection. For any feature set _S_, it defines a function _F(S)_ that tells how many pairs of samples from different classes  can the features in S distinguish. 
 The algorithm starts with an empty set _S'_ of slected features. It hence greedily selects the feature leading to the largest increase of _F(S')_ using the exponential mechanism. 
 The above assumes that all features are categorical. 
 
-[Smith:13](#Smith:13) propose an $`(\epsilon, \delta)`$-differentially private algorithm for _stable_ target function. A stable function is one whose either (a) value does not change when it takes in input a dataset D or a dataset D' with some samples change, or (b) the function output stay the same, with high probability, on a random subset of the input dataset. 
+[Smith:13](#Smith:13) propose an <img align="center" src="https://latex.codecogs.com/gif.latex?(\epsilon, \delta)"/>-differentially private algorithm for _stable_ target function. A stable function is one whose either (a) value does not change when it takes in input a dataset D or a dataset D' with some samples change, or (b) the function output stay the same, with high probability, on a random subset of the input dataset. 
 For the first kind of functions, the mechanism uses the [smooth sensitivity](#smooth_sensitivity) framework to select features. For the second kind of functions, the algorithm uses a similar framework to that of the sample-and-aggregate framework: It creates some bootstrap set from the private data, selects the features non-privately on each set, and counts the frequencies of feature set output by the algorithm. The mechanism can release the most frequently selected set of features. 
 
 ##### References
@@ -552,25 +583,26 @@ Data Release mechanisms can be categorized into:
 [Abadi et al.](#Abadi:16) presented an approach to train neural networks based on a differentially private stochastic gradient descent and the use of the [moments accountant](#_moments_accountant). 
 
 <img width="400" align="right" src="imgs/private_SGD.png">
-The private SGD is illustrated in the algorithm on the right. It illustrates how to train a model with parameter $`\theta`$ by minimizing the empirical loss function $`\mathcal{L}(\theta))`$. 
-At each step of the SGD, it computes the gradient $`\nabla_\theta \mathcal{L}(\theta, x_i`$ for a sample batch, clip the $`\ell_2`$ norm of each gradient, compute the average, add noise to guarantee privacy, and take a step in the opposite direction of this average noisy gradient. 
+The private SGD is illustrated in the algorithm on the right. It illustrates how to train a model with parameter <img align="center" src="https://latex.codecogs.com/gif.latex?\theta"/> by minimizing the empirical loss function <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{L}(\theta))"/>. 
+At each step of the SGD, it computes the gradient <img align="center" src="https://latex.codecogs.com/gif.latex?\nabla_\theta \mathcal{L}(\theta, x_i"/> for a sample batch, clip the <img align="center" src="https://latex.codecogs.com/gif.latex?\ell_2"/> norm of each gradient, compute the average, add noise to guarantee privacy, and take a step in the opposite direction of this average noisy gradient. 
 
-- _Clipping_: Guaranteeing DP requires to bound the influence of each individual example on the gradient. Since there is no a priori bound on the size of the gradients, the methods _clips_ each gradient in $`\ell_2`$ norm using a threshold $`C`$. 
+- _Clipping_: Guaranteeing DP requires to bound the influence of each individual example on the gradient. Since there is no a priori bound on the size of the gradients, the methods _clips_ each gradient in <img align="center" src="https://latex.codecogs.com/gif.latex?\ell_2"/> norm using a threshold <img align="center" src="https://latex.codecogs.com/gif.latex?C"/>. 
 
-- _Noise addition_: Note that, in this algorithm $`\theta`$ subsumes all the model parameters of the loss function $`\mathcal{L}(\cdot)`$. For multi-layer Nets we need to consider each layer separately. This also allows one to select different clipping thresholds _C_ and noise scales $`\sigma`$ for each layer.
+- _Noise addition_: Note that, in this algorithm <img align="center" src="https://latex.codecogs.com/gif.latex?\theta"/> subsumes all the model parameters of the loss function <img align="center" src="https://latex.codecogs.com/gif.latex?\mathcal{L}(\cdot)"/>. For multi-layer Nets we need to consider each layer separately. This also allows one to select different clipping thresholds _C_ and noise scales <img align="center" src="https://latex.codecogs.com/gif.latex?\sigma"/> for each layer.
 
 
-- _Accounting_: Choosing $`\sigma = \sqrt{2 \log \frac{1.25}{\delta}/ \epsilon}`$ will derive $`\epsilon, \delta`$-DP at each step. One could use advanced composition to derive a $`O(q\epsilon), q\delta`$-DP algorithm with respect to a dataset where $`q = L/N`$ is the sampling ratio per lot (a batch) and $`N`$ the dataset size, with $`\epsilon < 1`$. 
-The work, however, introduced a the moments accountant to derive a $`O(q\epsilon \sqrt{T}), \delta`$ bound where _T_ is the number of iterations of the algorithm. The paper show (Thm. 1) that, exists $`c_1, c_2 \in \mathbb{R}`$ such that given the sampling probability $`q=L/N`$ and the number of steps $`T`$, for any $`\epsilon < c_1 q^2 T`$, the algorithm above is $`\epsilon, \delta`$-differentially private for any $`\delta > 0`$ with 
+- _Accounting_: Choosing <img align="center" src="https://latex.codecogs.com/gif.latex?\sigma = \sqrt{2 \log \frac{1.25}{\delta}/ \epsilon}"/> will derive <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon, \delta"/>-DP at each step. One could use advanced composition to derive a <img align="center" src="https://latex.codecogs.com/gif.latex?O(q\epsilon), q\delta"/>-DP algorithm with respect to a dataset where <img align="center" src="https://latex.codecogs.com/gif.latex?q = L/N"/> is the sampling ratio per lot (a batch) and <img align="center" src="https://latex.codecogs.com/gif.latex?N"/> the dataset size, with <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon < 1"/>. 
+The work, however, introduced a the moments accountant to derive a <img align="center" src="https://latex.codecogs.com/gif.latex?O(q\epsilon \sqrt{T}), \delta"/> bound where _T_ is the number of iterations of the algorithm. The paper show (Thm. 1) that, exists <img align="center" src="https://latex.codecogs.com/gif.latex?c_1, c_2 \in \mathbb{R}"/> such that given the sampling probability <img align="center" src="https://latex.codecogs.com/gif.latex?q=L/N"/> and the number of steps <img align="center" src="https://latex.codecogs.com/gif.latex?T"/>, for any <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon < c_1 q^2 T"/>, the algorithm above is <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon, \delta"/>-differentially private for any <img align="center" src="https://latex.codecogs.com/gif.latex?\delta > 0"/> with 
 
-```math
+<center>
+<img align="center" src="https://latex.codecogs.com/gif.latex?
 	\sigma \geq c_2 \frac{q \sqrt{T \log(1/\delta)}}{\epsilon}.
+"/>
+</center>
 
-```
-
-The saving are significant. For example, with $`L = 0.01N, \sigma = 4, \delta =
-10^{−5}`$
-, and $`T = 10000`$, moments accountant produces $`\epsilon \sim 1.26 `$, while strong composition produces $`\epsilon = 9.34`$.
+The saving are significant. For example, with <img align="center" src="https://latex.codecogs.com/gif.latex?L = 0.01N, \sigma = 4, \delta =
+10^{−5}"/>
+, and <img align="center" src="https://latex.codecogs.com/gif.latex?T = 10000"/>, moments accountant produces <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon \sim 1.26 "/>, while strong composition produces <img align="center" src="https://latex.codecogs.com/gif.latex?\epsilon = 9.34"/>.
 
 
 ### The PATE Framework 
@@ -588,7 +620,7 @@ A teacher model can be *any* learning model. It does not have to be private eith
 2. <strong>Aggregation Mechanism</strong>: The aggregation mechanism assigns a labels to data points using the predictions from the teacher ensemble. To guarantee privacy, the mechanism uses Noisy Max and outputs the class with the highest noisy votes as the ensemble's prediction. 
 This step assumes that the privacy loss of each aggregated prediction made by the teacher ensemble is known. 
 
-For sample $`x`$ and classes $`1,\ldots,m`$, let $`f_j(x) \in [m]`$ denote the _j_-th model's prediction and let $`n_i`$ denote the vote count for the _i_-th class. The mechanism outputs $` \arg\max_i n_i(x) + \text{Lap}(1/\lambda)`$. 
+For sample <img align="center" src="https://latex.codecogs.com/gif.latex?x"/> and classes <img align="center" src="https://latex.codecogs.com/gif.latex?1,\ldots,m"/>, let <img align="center" src="https://latex.codecogs.com/gif.latex?f_j(x) \in [m]"/> denote the _j_-th model's prediction and let <img align="center" src="https://latex.codecogs.com/gif.latex?n_i"/> denote the vote count for the _i_-th class. The mechanism outputs <img align="center" src="https://latex.codecogs.com/gif.latex? \arg\max_i n_i(x) + \text{Lap}(1/\lambda)"/>. 
 
 While this model guarantee privacy it faces two limitations: First, each prediction made by the aggregation mechanism increases the total privacy budget. Second, the ensemble cannot be made public. To overcome these limitations, a student model is introduced.
 
